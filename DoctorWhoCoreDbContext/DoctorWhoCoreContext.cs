@@ -1,9 +1,11 @@
 ﻿using DoctorWho.Db.Models;
+using FluentAssertions.Common;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace DoctorWho.Db
 {
-    public class DoctorWhoCoreDbContext : DbContext
+    public class DoctorWhoCoreContext : DbContext
     {
         DbSet<Enemy> Enemies { get; set; }
         DbSet <Author> Authors { get; set; }
@@ -14,7 +16,9 @@ namespace DoctorWho.Db
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("ConnectionString");
+
+            string connectionString = "Server=localhost;Database=DoctorWhoCore;Trusted_Connection=True;TrustServerCertificate=True;";
+            optionsBuilder.UseSqlServer(connectionString);
         }
 
 

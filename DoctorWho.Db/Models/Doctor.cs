@@ -1,12 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DoctorWho.Db.Models;
+using System.ComponentModel.DataAnnotations;
 
-namespace DoctorWho.Db.Models
+public class Doctor
 {
-    internal class Doctor
+    public Doctor()
     {
+        DoctorName = "";
+        Episodes= new List<Episode>();  
     }
+    [Key]
+    public int DoctorId { get; set; }
+    public int DoctorNumber { get; set; }
+    [MaxLength(100)]
+    public string DoctorName { get; set; }
+    public DateTime BirthDate { get; set; }
+    public DateTime FirstEpisodeDate { get; set; }
+    public DateTime LastEpisodeDate { get; set; }
+    public List<Episode> Episodes { get; set; }
 }

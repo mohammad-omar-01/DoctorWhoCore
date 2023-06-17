@@ -1,12 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DoctorWho.Db.Models;
+using System.ComponentModel.DataAnnotations;
 
-namespace DoctorWho.Db.Models
+public class Author
 {
-    internal class Author
+    public Author()
     {
+        Episodes = new List<Episode>();
+        AuthorName = "";
     }
+
+    [Key]
+    public int AuthorId { get; set; }
+
+    [MaxLength(50)]
+    public string AuthorName { get; set; }
+    public List<Episode> Episodes { get; set; }
 }
