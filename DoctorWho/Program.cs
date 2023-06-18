@@ -1,13 +1,14 @@
 ﻿using DoctorWho.Db;
 using DoctorWho.Db.Models;
+using FluentAssertions;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+using System.Data;
 
 DoctorWhoCoreContext context = new DoctorWhoCoreContext();
 
 void AddEnimesToEpisode(int episodeId, int enmeyId)
 {
-
-
-
     var epsiode = context.Episodes.FirstOrDefault(a => a.EpisodeId == episodeId);
     var enemey = context.Enemies.FirstOrDefault(a => a.EnemyId == enmeyId);
     epsiode.Enemies.Add(enemey);
@@ -22,20 +23,19 @@ void AddCompanionToEpisode(int episodeId, int companionId)
 }
 void AddEnimesToEpisodes()
 {
-
     var episodes = context.Episodes.ToList();
     var enemies = context.Enemies.ToList();
     var i = 1;
-    foreach (var episode in episodes) {
-        episode.Enemies.Add(enemies.FirstOrDefault(a=>a.EnemyId==i));
+    foreach (var episode in episodes)
+    {
+        episode.Enemies.Add(enemies.FirstOrDefault(a => a.EnemyId == i));
         i++;
-    
     }
-    
-    context.SaveChanges();
 
+    context.SaveChanges();
 }
-void AddCompanionToepisode() {
+void AddCompanionToepisode()
+{
 
     var episodes = context.Episodes.ToList();
     var companions = context.Companions.ToList();
@@ -44,24 +44,35 @@ void AddCompanionToepisode() {
     {
         episode.Companions.Add(companions.FirstOrDefault(a => a.CompanionId == i));
         i++;
-
     }
 
     context.SaveChanges();
 
 }
+void AddAuhtorUsingStoredProecure(string name)
+{
+    context.Database.ExecuteSqlInterpolated($"exec inseartAuthors {name}");
+    context.SaveChanges();
+}
+void ViewExcution()
+{
+
+    var result = context.EpisodeSummaries.ToList();
+    foreach (var episode in result)
+    {
+        Console.WriteLine($"Epsiode Name {episode.Title},Episode Enemey {episode.EnemyNames}");
+    }
+}
+
+void functionExcution()
+{
+    int episodeId = 3;
+
+    var result = context.Database.SqlQuery<string>($"SELECT dbo.fnCompanion ({episodeId})").ToList();
+    result.ForEach(a=>Console.WriteLine(a));
 
 
-//AddEnimesToEpisodes();
-//AddEnimesToEpisode(2, 1);
-AddCompanionToepisode();
-AddCompanionToEpisode(1, 2);
-AddCompanionToEpisode(2, 2);
-AddCompanionToEpisode(3, 2);
-AddCompanionToEpisode(4, 2);
-AddCompanionToEpisode(5, 2);
-AddCompanionToEpisode(2,3);
-AddCompanionToEpisode(3, 3);
+}
 
 
-
+functionExcution();
