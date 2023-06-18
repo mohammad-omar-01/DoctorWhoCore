@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore;
 using System.Data;
 
 DoctorWhoCoreContext context = new DoctorWhoCoreContext();
-
 void AddEnimesToEpisode(int episodeId, int enmeyId)
 {
     var epsiode = context.Episodes.FirstOrDefault(a => a.EpisodeId == episodeId);
@@ -54,6 +53,18 @@ void AddAuhtorUsingStoredProecure(string name)
     context.Database.ExecuteSqlInterpolated($"exec inseartAuthors {name}");
     context.SaveChanges();
 }
+ List<Doctor> GetAllDoctors()
+{
+    return context.Doctors.ToList();
+}
+ Enemy GetEnemyById(int enemyId)
+{
+    return context.Enemies.Find(enemyId);
+}
+ Companion GetCompanionById(int companionId)
+{
+    return context.Companions.Find(companionId);
+}
 void ViewExcution()
 {
 
@@ -63,7 +74,6 @@ void ViewExcution()
         Console.WriteLine($"Epsiode Name {episode.Title},Episode Enemey {episode.EnemyNames}");
     }
 }
-
 void FnCompanion()
 {
     int episodeId = 3;
@@ -78,13 +88,11 @@ void FnCompanion()
     context.Companions.Add(companion);
     context.SaveChanges();
 }
-
  void UpdateCompanion(Companion companion)
 {
     context.Companions.Update(companion);
     context.SaveChanges();
 }
-
  void DeleteCompanion(int companionId)
 {
     var companion = context.Companions.Find(companionId);
@@ -94,19 +102,16 @@ void FnCompanion()
         context.SaveChanges();
     }
 }
-
  void CreateEnemy(Enemy enemy)
 {
     context.Enemies.Add(enemy);
     context.SaveChanges();
 }
-
  void UpdateEnemy(Enemy enemy)
 {
     context.Enemies.Update(enemy);
     context.SaveChanges();
 }
-
  void DeleteEnemy(int enemyId)
 {
     var enemy = context.Enemies.Find(enemyId);
@@ -116,19 +121,16 @@ void FnCompanion()
         context.SaveChanges();
     }
 }
-
  void CreateDoctor(Doctor doctor)
 {
     context.Doctors.Add(doctor);
     context.SaveChanges();
 }
-
  void UpdateDoctor(Doctor doctor)
 {
     context.Doctors.Update(doctor);
     context.SaveChanges();
 }
-
  void DeleteDoctor(int doctorId)
 {
     var doctor = context.Doctors.Find(doctorId);
@@ -138,19 +140,16 @@ void FnCompanion()
         context.SaveChanges();
     }
 }
-
  void CreateAuthor(Author author)
 {
     context.Authors.Add(author);
     context.SaveChanges();
 }
-
  void UpdateAuthor(Author author)
 {
     context.Authors.Update(author);
     context.SaveChanges();
 }
-
  void DeleteAuthor(int authorId)
 {
     var author = context.Authors.Find(authorId);
@@ -160,13 +159,11 @@ void FnCompanion()
         context.SaveChanges();
     }
 }
-
  void CreateEpisode(Episode episode)
 {
     context.Episodes.Add(episode);
     context.SaveChanges();
 }
-
  void UpdateEpisode(Episode episode)
 {
     context.Episodes.Update(episode);
