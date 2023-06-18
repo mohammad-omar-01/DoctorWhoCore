@@ -16,7 +16,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DoctorWho.Db\DoctorWho.Db.csproj" />
-    <ProjectReference Include="..\DoctorWhoCoreDbContext\DoctorWhoCoreDbContext.csproj" />
   </ItemGroup>
 
 </Project>
