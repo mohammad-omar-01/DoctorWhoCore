@@ -1,4 +1,9 @@
 ﻿using DoctorWho.Db;
+using DoctorWho.Db.Models;
+using FluentAssertions;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+using System.Data;
 
 DoctorWhoCoreContext context = new DoctorWhoCoreContext();
 
@@ -44,9 +49,30 @@ void AddCompanionToepisode()
     context.SaveChanges();
 
 }
-//AddEnimesToEpisodes();
-//AddEnimesToEpisode(2, 1);
-AddCompanionToepisode();
-AddCompanionToEpisode(1, 2);
-AddCompanionToEpisode(2, 2);
-AddCompanionToEpisode(3, 2);
+void AddAuhtorUsingStoredProecure(string name)
+{
+    context.Database.ExecuteSqlInterpolated($"exec inseartAuthors {name}");
+    context.SaveChanges();
+}
+void ViewExcution()
+{
+
+    var result = context.EpisodeSummaries.ToList();
+    foreach (var episode in result)
+    {
+        Console.WriteLine($"Epsiode Name {episode.Title},Episode Enemey {episode.EnemyNames}");
+    }
+}
+
+void functionExcution()
+{
+    int episodeId = 3;
+
+    var result = context.Database.SqlQuery<string>($"SELECT dbo.fnCompanion ({episodeId})").ToList();
+    result.ForEach(a=>Console.WriteLine(a));
+
+
+}
+
+
+functionExcution();

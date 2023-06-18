@@ -3,6 +3,7 @@ using DoctorWhoCoreDbContext.Seed_;
 using FluentAssertions.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 
 namespace DoctorWho.Db
 {
@@ -13,16 +14,29 @@ namespace DoctorWho.Db
         public DbSet<Episode> Episodes { get; set; }
         public DbSet<Doctor> Doctors { get; set; }
         public DbSet<Companion> Companions { get; set; }
+        public DbSet<EpisodeSummary> EpisodeSummaries { get; set; }
+
+        [DbFunction("fnCompanion", "DoctorWho.Db")]
+        public static string GetCompanion(int episodeId)
+        {
+            throw new NotImplementedException();
+        }
+
+
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
 
             string connectionString = "Server=localhost;Database=DoctorWhoCore;Trusted_Connection=True;TrustServerCertificate=True;";
-            optionsBuilder.UseSqlServer(connectionString);
+            optionsBuilder.UseSqlServer(connectionString).LogTo(Console.WriteLine, new[] {DbLoggerCategory.Database.Command.Name},LogLevel.Information );
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<EpisodeSummary>().ToView("viewEpisodes");
+
+            modelBuilder.Entity<EpisodeSummary>().HasNoKey();
+
             modelBuilder.Entity<Enemy>(entity =>
             {
                 entity.Property(e => e.EnemyDescription)
