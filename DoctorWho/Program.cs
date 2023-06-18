@@ -64,7 +64,7 @@ void ViewExcution()
     }
 }
 
-void functionExcution()
+void FnCompanion()
 {
     int episodeId = 3;
 
@@ -73,6 +73,113 @@ void functionExcution()
 
 
 }
+ void CreateCompanion(Companion companion)
+{
+    context.Companions.Add(companion);
+    context.SaveChanges();
+}
+
+ void UpdateCompanion(Companion companion)
+{
+    context.Companions.Update(companion);
+    context.SaveChanges();
+}
+
+ void DeleteCompanion(int companionId)
+{
+    var companion = context.Companions.Find(companionId);
+    if (companion != null)
+    {
+        context.Companions.Remove(companion);
+        context.SaveChanges();
+    }
+}
+
+ void CreateEnemy(Enemy enemy)
+{
+    context.Enemies.Add(enemy);
+    context.SaveChanges();
+}
+
+ void UpdateEnemy(Enemy enemy)
+{
+    context.Enemies.Update(enemy);
+    context.SaveChanges();
+}
+
+ void DeleteEnemy(int enemyId)
+{
+    var enemy = context.Enemies.Find(enemyId);
+    if (enemy != null)
+    {
+        context.Enemies.Remove(enemy);
+        context.SaveChanges();
+    }
+}
+
+ void CreateDoctor(Doctor doctor)
+{
+    context.Doctors.Add(doctor);
+    context.SaveChanges();
+}
+
+ void UpdateDoctor(Doctor doctor)
+{
+    context.Doctors.Update(doctor);
+    context.SaveChanges();
+}
+
+ void DeleteDoctor(int doctorId)
+{
+    var doctor = context.Doctors.Find(doctorId);
+    if (doctor != null)
+    {
+        context.Doctors.Remove(doctor);
+        context.SaveChanges();
+    }
+}
+
+ void CreateAuthor(Author author)
+{
+    context.Authors.Add(author);
+    context.SaveChanges();
+}
+
+ void UpdateAuthor(Author author)
+{
+    context.Authors.Update(author);
+    context.SaveChanges();
+}
+
+ void DeleteAuthor(int authorId)
+{
+    var author = context.Authors.Find(authorId);
+    if (author != null)
+    {
+        context.Authors.Remove(author);
+        context.SaveChanges();
+    }
+}
+
+ void CreateEpisode(Episode episode)
+{
+    context.Episodes.Add(episode);
+    context.SaveChanges();
+}
+
+ void UpdateEpisode(Episode episode)
+{
+    context.Episodes.Update(episode);
+    context.SaveChanges();
+}
+ void DeleteEpisode(int episodeId)
+{
+    var episode = context.Episodes.Find(episodeId);
+    if (episode != null)
+    {
+        context.Episodes.Remove(episode);
+        context.SaveChanges();
+    }
+}
 
 
-functionExcution();
