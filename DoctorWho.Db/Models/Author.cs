@@ -1,5 +1,6 @@
 ﻿using DoctorWho.Db.Models;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 public class Author
 {
@@ -10,6 +11,7 @@ public class Author
     }
 
     [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int AuthorId { get; set; }
 
     [MaxLength(50)]

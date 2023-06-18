@@ -1,5 +1,6 @@
 ﻿using DoctorWho.Db.Models;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 public class Doctor
 {
@@ -9,6 +10,8 @@ public class Doctor
         Episodes= new List<Episode>();  
     }
     [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+
     public int DoctorId { get; set; }
     public int DoctorNumber { get; set; }
     [MaxLength(100)]

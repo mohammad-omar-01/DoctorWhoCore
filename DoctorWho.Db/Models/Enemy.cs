@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DoctorWho.Db.Models
 {
@@ -12,10 +13,11 @@ namespace DoctorWho.Db.Models
 
         }
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+
         public int EnemyId { get; set; }
         [MaxLength(50)]
         public string EnemyName { get; set; }
-        [MaxLength(100)]
         public string EnemyDescription { get; set;}
         public List<Episode> Episodes { get; set;}
     }

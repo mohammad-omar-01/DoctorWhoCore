@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DoctorWho.Db.Models
 {
@@ -10,6 +11,8 @@ namespace DoctorWho.Db.Models
             Episodes= new List<Episode>();
         }
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+
         public int CompanionId { get; set; }
         [MaxLength(100)]
         public string CompanionName { get; set; }

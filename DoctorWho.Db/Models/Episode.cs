@@ -14,8 +14,9 @@ namespace DoctorWho.Db.Models
             Companions=new List<Companion>();   
             
         }
-        [Required]
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+
         public int EpisodeId { get; set; }
         public int SeriesNumber { get; set; }
         public int EpisodeNumber { get; set; }
@@ -28,7 +29,6 @@ namespace DoctorWho.Db.Models
         public int AuthorId { get; set; }
         [ForeignKey("Doctor")]
         public int DoctorId { get; set; }
-        [MaxLength(50)]
         public string Notes { get; set; }
         public List<Enemy> Enemies {  get; set; }
         public List<Companion> Companions { get; set; }
